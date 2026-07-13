@@ -1,0 +1,11 @@
+_target_: src.data.urban_sed_datamodule.UrbanSedDataModule
+
+feature_dir: ${paths.data_dir}/urban_sed_features
+batch_size: 64
+num_workers: 8
+pin_memory: true
+persistent_workers: true
+
+# Chunking (paper Section 3.3): 2 s windows with a 0.5 s hop.
+chunk_sec: 2.0
+chunk_hop_sec: 0.5

@@ -1,0 +1,9 @@
+# @package _global_
+# Bidirectional HCRNN with hypernetwork hidden size 64 (HCRNN-64-Bi).
+experiment_name: hcrnn64_bi
+model:
+  rnn_type: hyperlstm
+  bidirectional: true
+  rnn_hidden: 256
+  hyper_hidden: 64
+  hyper_n_z: 8

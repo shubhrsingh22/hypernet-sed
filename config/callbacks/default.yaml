@@ -1,0 +1,29 @@
+# Keep the best 10 checkpoints (by val loss) so the test set can be scored as the
+# mean over 10 epochs, following the paper's evaluation protocol (Section 3.4).
+model_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: ${paths.output_dir}/checkpoints
+  filename: "epoch_{epoch:03d}_val_loss_{val/loss:.4f}"
+  monitor: "val/loss"
+  mode: "min"
+  save_last: true
+  save_top_k: 10
+  auto_insert_metric_name: false
+  verbose: false
+
+early_stopping:
+  _target_: lightning.pytorch.callbacks.EarlyStopping
+  monitor: "val/loss"
+  mode: "min"
+  patience: 10
+  min_delta: 0.0
+  check_finite: true
+  verbose: true
+
+lr_monitor:
+  _target_: lightning.pytorch.callbacks.LearningRateMonitor
+  logging_interval: "epoch"
+
+model_summary:
+  _target_: lightning.pytorch.callbacks.RichModelSummary
+  max_depth: 2

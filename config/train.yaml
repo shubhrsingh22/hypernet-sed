@@ -1,0 +1,32 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - data: urban_sed
+  - modules: sed
+  - model: crnn
+  - callbacks: default
+  - logger: csv
+  - trainer: default
+  - paths: default
+  - hydra: default
+  - experiment: null
+
+# Identifies the run; overridden by experiment configs (crnn_bi, hcrnn128, ...).
+experiment_name: crnn_bi
+task_name: train
+tags: ["urban-sed"]
+
+# Resume training from a checkpoint if provided.
+ckpt_path: null
+
+# Random seed (set per run for the multi-seed study).
+seed: 42
+
+# Segment-F1 evaluation settings (post-training).
+eval_threshold: 0.5
+median_filter_frames: 0
+
+# Shared values referenced by multiple configs.
+shared:
+  max_epochs: 250

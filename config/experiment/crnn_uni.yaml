@@ -1,0 +1,6 @@
+# @package _global_
+# Unidirectional CRNN baseline (Uni-baseline in Table 2).
+experiment_name: crnn_uni
+model:
+  rnn_type: lstm
+  bidirectional: false

@@ -1,0 +1,22 @@
+# Data & artifacts (anchored to repo root so src/data/ is NOT ignored)
+/data/
+/logs/
+/results/
+/outputs/
+/multirun/
+*.ckpt
+*.npy
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+env/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

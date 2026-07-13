@@ -1,0 +1,6 @@
+# @package _global_
+# Bidirectional CRNN baseline (Bi-baseline in Table 2).
+experiment_name: crnn_bi
+model:
+  rnn_type: lstm
+  bidirectional: true

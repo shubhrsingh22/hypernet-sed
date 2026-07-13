@@ -1,0 +1,12 @@
+_target_: src.modules.sed_module.SEDModule
+
+net: ${model}
+
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 4e-5
+
+scheduler: null
+
+compile: false

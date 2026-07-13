@@ -1,0 +1,19 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - data: urban_sed
+  - modules: sed
+  - model: crnn
+  - paths: default
+  - hydra: default
+  - experiment: null
+
+experiment_name: eval
+ckpt_path: null
+split: test
+eval_threshold: 0.5
+median_filter_frames: 0
+
+shared:
+  max_epochs: 250

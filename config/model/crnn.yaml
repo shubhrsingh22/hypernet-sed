@@ -1,0 +1,23 @@
+# CRNN / HCRNN network (the recurrent block is selected via rnn_type).
+_target_: src.modules.components.crnn.CRNN
+
+num_classes: 10
+n_mels: 96
+cnn_channels: [64, 128, 256, 512]
+
+# Pooling per CNN block. Frequency is pooled 96 -> 6 and then adaptively pooled
+# to 1 inside the model; the time axis is preserved to keep the per-frame rate
+# required for strong-label SED. See src/modules/components/crnn.py.
+time_pool: [1, 1, 1, 1]
+freq_pool: [2, 2, 2, 2]
+
+# Recurrent block: "lstm" (CRNN baseline) or "hyperlstm" (HCRNN).
+rnn_type: lstm
+rnn_hidden: 256
+bidirectional: false
+
+# HyperLSTM settings (used only when rnn_type == hyperlstm).
+hyper_hidden: 128
+hyper_n_z: 8
+
+dropout: 0.0
