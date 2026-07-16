@@ -123,6 +123,26 @@ python -m src.aggregate_results --logs_dir logs --out_dir results
 # -> results/table2.csv, results/table2.md
 ```
 
+## Parameter count and walltime
+
+Measured with `scripts/params_walltime.py` (single NVIDIA L40S, PyTorch 2.5.1,
+float32, no JIT/torch.compile, batch 64 x 2 s chunks of 172x96 log-mel, Adam +
+BCE; train step = forward+backward+optimizer, inference under `no_grad`):
+
+| Model | Trainable params (M) | Train step (ms) | Inference (ms/clip) |
+|---|---|---|---|
+| crnn_uni  | 2.34 | 65.2  | 0.31 |
+| crnn_bi   | 5.76 | 69.2  | 0.33 |
+| hcrnn32   | 2.47 | 483.2 | 1.48 |
+| hcrnn64   | 2.59 | 482.6 | 1.53 |
+| hcrnn128  | 2.84 | 505.7 | 1.53 |
+| hcrnn256  | 3.44 | 504.7 | 1.53 |
+
+The HCRNNs have fewer parameters than the Bi-baseline but are ~7x slower per
+step: the HyperLSTM is a per-timestep Python loop, whereas `nn.LSTM` uses the
+fused cuDNN kernel. Parameter count therefore does not imply runtime speed.
+Raw numbers and environment details: `results/params_walltime.{md,csv}`.
+
 ## Standalone evaluation
 
 ```bash
